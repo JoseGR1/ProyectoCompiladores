@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package proyecto.compiladores;
 
 import java.awt.Color;
-
 /**
  *
  * @author jose5
  */
 public class DialogError extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DialogError
-     */
     public DialogError() {
         initComponents();
         setBackground(new Color(0,0,0,0));
@@ -29,6 +21,7 @@ public class DialogError extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCustom1 = new Swing.PanelCustom();
         panel21 = new Swing.Panel2();
         jLabel1 = new javax.swing.JLabel();
         button1 = new Swing.Button();
@@ -36,6 +29,8 @@ public class DialogError extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        panelCustom1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/cancelar.png"))); // NOI18N
 
@@ -79,15 +74,17 @@ public class DialogError extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        panelCustom1.add(panel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
 
         pack();
@@ -125,6 +122,7 @@ public class DialogError extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DialogError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -141,5 +139,6 @@ public void setTxtdialogo(String mensaje) {
     private javax.swing.JLabel errortxt;
     private javax.swing.JLabel jLabel1;
     private Swing.Panel2 panel21;
+    private Swing.PanelCustom panelCustom1;
     // End of variables declaration//GEN-END:variables
 }
