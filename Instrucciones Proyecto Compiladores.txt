@@ -1,0 +1,8 @@
+----------------NETBEANS--------------------
+La carpeta "Proyecto Compiladores" es el proyecto en netbeans
+
+-Cambiar la ruta donde guarda el archivo html  el la funcion "guardarCodigoHTML"
+Asi tambien como la ruta donde esta el servidor Tomcat o el que se utilice.
+
+---------------PARA SERVIDOR-----------------
+Cargar la carpera "Proyecto-Compiladores" en las webapps del Servidor 
