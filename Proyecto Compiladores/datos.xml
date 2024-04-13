@@ -2,7 +2,7 @@
     <titulo>Proyecto 1</titulo>
     <ciclo>
         <indice>i</indice>
-        <iterador>5</iterador>
+        <iterador>10</iterador>
         <mensaje>Hola mundo</mensaje>
         <tipo>for</tipo>
     </ciclo>
@@ -19,6 +19,12 @@
         <var2>20</var2>
     </operacion>
     <operacion>
+        <titulo>Resta</titulo>
+        <signo>-8</signo>
+        <var1>a</var1>
+        <var2>20</var2>
+    </operacion>
+    <operacion>
         <titulo>Multiplicacion</titulo>
         <signo>*</signo>
         <var1>10</var1>
@@ -27,43 +33,19 @@
     <operacion>
         <titulo>Division</titulo>
         <signo>/</signo>
-        <var1>10</var1>
+        <var1>15</var1>
         <var2>20</var2>
+    </operacion>
+    <operacion>
+        <titulo>Division</titulo>
+        <signo>/</signo>
+        <var1>15</var1>
+        <var2>0</var2>
     </operacion>
     <ciclo>
         <indice>i</indice>
-        <iterador>2</iterador>
-        <mensaje>Prueba XML</mensaje>
-        <tipo>for</tipo>
-    </ciclo>
-        <ciclo>
-        <indice>i</indice>
         <iterador>10</iterador>
-        <mensaje>Prueba 4</mensaje>
+        <mensaje>PRUEBA</mensaje>
         <tipo>for</tipo>
     </ciclo>
-    <operacion>
-        <titulo>Suma</titulo>
-        <signo>+</signo>
-        <var1>54</var1>
-        <var2>50</var2>
-    </operacion>
-    <operacion>
-        <titulo>Resta</titulo>
-        <signo>-</signo>
-        <var1>100</var1>
-        <var2>20</var2>
-    </operacion>
-    <operacion>
-        <titulo>Multiplicacion</titulo>
-        <signo>*</signo>
-        <var1>32</var1>
-        <var2>20</var2>
-    </operacion>
-    <operacion>
-        <titulo>Division</titulo>
-        <signo>/</signo>
-        <var1>50</var1>
-        <var2>6</var2>
-    </operacion>
 </encabezado>

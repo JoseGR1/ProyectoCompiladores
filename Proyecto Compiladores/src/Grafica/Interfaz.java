@@ -11,7 +11,6 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -230,16 +229,10 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_rutaXMLActionPerformed
 
     private void btnanalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanalizarActionPerformed
+        ProcesoXML xml = new ProcesoXML();
         try {
-            ProcesoXML xml = new ProcesoXML();
-            try {
-                xml.guardarCodigoHTML(xml.generarCodigoFrontend(rutaXML.getText()));
-            } catch (Exception ex) {
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            // TODO add your handling code here:
-            Runtime.getRuntime().exec("cmd /c start navegador.html");
-        } catch (IOException ex) {
+            xml.guardarCodigoHTML(xml.generarCodigoFrontend(rutaXML.getText()));
+        } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnanalizarActionPerformed

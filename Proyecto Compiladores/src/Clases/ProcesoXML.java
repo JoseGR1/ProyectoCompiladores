@@ -1,13 +1,21 @@
 package Clases;
 
+import java.awt.Desktop;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProcesoXML {
-
+    
+    private static int contador = 0;
+    
+//Jose Gonzalez
     public  String generarCodigoFrontend(String filePath) throws Exception {
-        
+        TS ts = new TS();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(new File(filePath));
@@ -30,10 +38,14 @@ public class ProcesoXML {
             if (nodo instanceof Element) {
                 Element elemento = (Element) nodo;
                 String tagName = elemento.getTagName();
-                if ("ciclo".equals(tagName)) {
-                    procesarCiclo(elemento, codigoHTML);
-                } else if ("operacion".equals(tagName)) {
-                    procesarOperacion(elemento, codigoHTML);
+                if(TS.validarEtiqueta(tagName)){
+                    if ("ciclo".equals(tagName) ) {
+                        procesarCiclo(elemento, codigoHTML);
+                    } else if ("operacion".equals(tagName)) {
+                        procesarOperacion(elemento, codigoHTML);
+                    } 
+                }else {
+                    System.out.println("Etiqueta no permitida");
                 }
             }
         }
@@ -42,48 +54,100 @@ public class ProcesoXML {
         return codigoHTML.toString();
     }
 
+//Juan Gonzalez    
     private static void procesarCiclo(Element ciclo, StringBuilder codigoHTML) {
-        String indice = ciclo.getElementsByTagName("indice").item(0).getTextContent();
+        String indice  = ciclo.getElementsByTagName("indice").item(0).getTextContent();
         String iterador = ciclo.getElementsByTagName("iterador").item(0).getTextContent();
         String mensaje = ciclo.getElementsByTagName("mensaje").item(0).getTextContent();
 
-        codigoHTML.append("for(var ").append(indice).append(" = 0; ").append(indice).append(" < ").append(iterador).append("; ").append(indice).append("++) {\n");
-        codigoHTML.append("    mensajeGenerado.innerHTML += '").append(mensaje).append("<br />';\n");
-        codigoHTML.append("}\n");
-    }
+        try {
+            int iteradorInt = Integer.parseInt(iterador);
 
+            // Verificar si el índice y el iterador son válidos
+            if (iteradorInt >= 0) {
+                codigoHTML.append("for(var ").append(indice).append(" = 0; ").append(indice).append(" < ").append(iterador).append("; ").append(indice).append("++) {\n");
+                codigoHTML.append("    mensajeGenerado.innerHTML += '").append(mensaje).append("<br />';\n");
+                codigoHTML.append("}\n");
+            } else {
+                codigoHTML.append("mensajeGenerado.innerHTML += '<br />Iterador no válido: ").append(indice).append(", ").append(iterador).append("<br />';\n");
+            }
+        } catch (NumberFormatException e) {
+            // Manejar el caso de datos no válidos
+            codigoHTML.append("mensajeGenerado.innerHTML += '<br />Iterador no son números válidos.<br />';\n");
+        }
+    }
+//Jose Gonzalez
     private static void procesarOperacion(Element operacion, StringBuilder codigoHTML) {
         String titulo = operacion.getElementsByTagName("titulo").item(0).getTextContent();
         String signo = operacion.getElementsByTagName("signo").item(0).getTextContent();
         String var1 = operacion.getElementsByTagName("var1").item(0).getTextContent();
         String var2 = operacion.getElementsByTagName("var2").item(0).getTextContent();
-        String resultado = realizarOperacion(signo, Integer.parseInt(var1), Integer.parseInt(var2));
 
-        codigoHTML.append("mensajeGenerado.innerHTML += '<br /><strong>").append(titulo).append("</strong><br />';\n");
-        codigoHTML.append("mensajeGenerado.innerHTML += '").append(var1).append(" ").append(signo).append(" ").append(var2).append(" = ").append(resultado).append("<br />';\n");
-    }
-
-    private static String realizarOperacion(String signo, int var1, int var2) {
-        if ("+".equals(signo)) {
-            return Integer.toString(var1 + var2);
-        } else if ("-".equals(signo)) {
-            return Integer.toString(var1 - var2);
-        } else if ("*".equals(signo)){
-            return Integer.toString(var1 * var2);
-        } else if ("/".equals(signo)){
-            return Integer.toString(var1 / var2);
-        }
-        return "";
-    }
-    
-    public  void guardarCodigoHTML(String codigoHTML) {
         try {
-            FileWriter writer = new FileWriter("navegador.html");
-            writer.write(codigoHTML);
-            writer.close();
-            System.out.println("Archivo HTML guardado correctamente.");
+            int var1Int = Integer.parseInt(var1);
+            int var2Int = Integer.parseInt(var2);
+
+            // Verificar si var2 es válido para evitar la división por cero
+            if (!signo.equals("/") || var2Int != 0) {
+                String resultado = realizarOperacion(signo, var1Int, var2Int);
+
+                codigoHTML.append("mensajeGenerado.innerHTML += '<br /><strong>").append(titulo).append("</strong><br />';\n");
+                codigoHTML.append("mensajeGenerado.innerHTML += '").append(var1).append(" ").append(signo).append(" ").append(var2).append(" = ").append(resultado).append("<br />';\n");
+            } else {
+                codigoHTML.append("mensajeGenerado.innerHTML += '<br />División por cero no permitida.<br />';\n");
+            }
+        } catch (NumberFormatException e) {
+            // Manejar el caso de datos no válidos
+            codigoHTML.append("mensajeGenerado.innerHTML += '<br />Uno o ambos operandos no son números válidos.<br />';\n");
+        }
+    }
+
+//Ian Garcia
+    private static String realizarOperacion(String signo, int var1, int var2) {
+        TS ts = new TS();
+        if (ts.validarOperador(signo)) {
+            if ("+".equals(signo)) {
+                return Integer.toString(var1 + var2);
+            } else if ("-".equals(signo)) {
+                return Integer.toString(var1 - var2);
+            } else if ("*".equals(signo)){
+                return Integer.toString(var1 * var2);
+            } else if ("/".equals(signo)){
+                if (var2 != 0) {
+                    return Integer.toString(var1 / var2);
+                } else {
+                    return "División por cero no permitida";
+                }
+            }
+        }
+        return "Operador no válido";
+    }
+
+//Juan Gonzalez    
+    public  void guardarCodigoHTML(String codigoHTML) {
+        try {          
+            if(contador == 1){
+                //Actualizar el html
+                FileWriter writer = new FileWriter("C:/apache-tomcat-9.0.87/webapps/Proyecto-Compiladores/index.html");
+                writer.write(codigoHTML);
+                writer.close();
+                System.out.println("HTML Actualizado");
+            }else{
+                FileWriter writer = new FileWriter("C:/apache-tomcat-9.0.87/webapps/Proyecto-Compiladores/index.html");
+                writer.write(codigoHTML);
+                writer.close();
+                System.out.println("HTML Guardado");
+                // Abrir una nueva pestaña
+                String url = "http://localhost:8080/Proyecto-Compiladores/";
+                URI uri = new URI(url);
+                Desktop desktop = Desktop.getDesktop();         // Obtenemos el objeto Desktop
+                desktop.browse(uri);                // Abrela página web en el navegador predeterminado 
+                contador = 1;
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(ProcesoXML.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }    
 }
