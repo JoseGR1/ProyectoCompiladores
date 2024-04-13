@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Proyecto 1</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+<h1>Proyecto 1</h1>
+<div id="mensaje-generado"></div>
+<script type="text/javascript">
+var mensajeGenerado = document.getElementById('mensaje-generado');
+for(var i = 0; i < 10; i++) {
+    mensajeGenerado.innerHTML += 'Hola mundo<br />';
+}
+mensajeGenerado.innerHTML += '<br /><strong>Suma</strong><br />';
+mensajeGenerado.innerHTML += '10 + 20 = 30<br />';
+mensajeGenerado.innerHTML += '<br /><strong>Resta</strong><br />';
+mensajeGenerado.innerHTML += '10 - 20 = -10<br />';
+mensajeGenerado.innerHTML += '<br />Uno o ambos operandos no son números válidos.<br />';
+mensajeGenerado.innerHTML += '<br /><strong>Multiplicacion</strong><br />';
+mensajeGenerado.innerHTML += '10 * 20 = 200<br />';
+mensajeGenerado.innerHTML += '<br /><strong>Division</strong><br />';
+mensajeGenerado.innerHTML += '15 / 20 = 0<br />';
+mensajeGenerado.innerHTML += '<br />División por cero no permitida.<br />';
+for(var i = 0; i < 10; i++) {
+    mensajeGenerado.innerHTML += 'PRUEBA<br />';
+}
+</script>
+</body>
+</html>
